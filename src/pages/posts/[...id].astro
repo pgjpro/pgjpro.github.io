@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import { getPosts } from '../../lib';
-import { SITE, slugOf, fmtDate, readMin } from '../../site';
+import { SITE, slugOf, fmtDate, readMin, tagSlug } from '../../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -23,6 +23,9 @@ const d = post.data;
     </header>
     {d.cover && <div class="a-cover"><img src={d.cover} alt="" /></div>}
     <div class="prose"><Content /></div>
+    {d.tags.length > 0 && (
+      <ul class="tag-cloud post-tags">{d.tags.map((t) => <li><a href={`/tags/${tagSlug(t)}/`}># {t}</a></li>)}</ul>
+    )}
   </article>
 
   <aside class="author">

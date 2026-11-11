@@ -12,6 +12,9 @@ const posts = defineCollection({
     cover: z.string().optional(),      // 표지 이미지 경로 (예: /covers/bid.png, public 폴더 기준)
     date: z.coerce.date(),
     category: z.enum(CATEGORY_NAMES as [string, ...string[]]), // Marketing | AI & Automation | Projects | Journal
+    tags: z.array(z.string()).default([]),   // 검색어가 될 만한 단어
+    roadmap: z.number().optional(),          // "읽는 순서" 순번
+    featured: z.boolean().default(false),    // 홈 대표 글
     draft: z.boolean().default(false),
   }),
 });

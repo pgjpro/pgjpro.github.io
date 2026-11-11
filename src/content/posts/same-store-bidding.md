@@ -4,6 +4,9 @@ answer: 노출순위 구간별로 나눠 보니, 상단 노출을 줄였을 때 
 number: 2.2배
 date: 2026-11-11
 category: Marketing
+tags: [네이버 쇼핑검색, 입찰 전략, ROAS]
+roadmap: 1
+featured: true
 draft: true
 ---
 

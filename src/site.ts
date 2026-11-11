@@ -20,7 +20,17 @@ export const CATEGORIES = [
 ] as const;
 export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name) as unknown as readonly [string, ...string[]];
 
-export const slugOf = (cat: string) => CATEGORIES.find((c) => c.name === cat)?.slug ?? 'marketing';
+// 홈 "무엇이 궁금해서 오셨나요?" 선택지 → 카테고리 연결
+export const INTERESTS = [
+  { label: '검색광고 운영·성과 분석', cat: 'Marketing', lead: '광고비가 어디서 새는지, 어떤 숫자를 먼저 봐야 하는지부터 읽어 보세요.' },
+  { label: 'AI로 반복 업무 줄이기', cat: 'AI & Automation', lead: '마케터가 직접 써 본 AI 도구와 자동화 실험을 모았습니다.' },
+  { label: '직접 만든 프로젝트', cat: 'Projects', lead: '문제를 발견하고, 만들고, 바꿔 본 과정을 처음부터 끝까지 기록했습니다.' },
+  { label: '마케터 커리어·회고', cat: 'Journal', lead: '퍼포먼스 마케터로 일하며 한 고민과 회고입니다.' },
+] as const;
+
+export const tagSlug = (t: string) => encodeURIComponent(t.replace(/\s+/g, '-'));
+
+export const slugOf =(cat: string) => CATEGORIES.find((c) => c.name === cat)?.slug ?? 'marketing';
 
 export const fmtDate = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;

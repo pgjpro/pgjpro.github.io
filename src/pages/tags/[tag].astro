@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib';
+import { tagSlug } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((t) => ({
+    params: { tag: t.replace(/\s+/g, '-') },
+    props: { tag: t, posts: posts.filter((p) => p.data.tags.includes(t)) },
+  }));
+}
+const { tag, posts } = Astro.props;
+---
+<Base title={`# ${tag}`} current="posts" description={`'${tag}' 태그가 달린 글입니다.`}>
+  <header class="page-head">
+    <h1># {tag}</h1>
+    <p class="desc"><a href="/tags/">모든 태그 보기 →</a></p>
+  </header>
+  <PostList posts={posts} withSum />
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib';
+import { tagSlug } from '../../site';
+const counts = new Map<string, number>();
+for (const p of await getPosts()) for (const t of p.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+const tags = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'));
+---
+<Base title="태그" current="posts" description="주제별 태그 모음입니다.">
+  <header class="page-head"><h1>태그</h1></header>
+  {tags.length ? (
+    <ul class="tag-cloud">
+      {tags.map(([t, n]) => <li><a href={`/tags/${tagSlug(t)}/`}># {t} <small>{n}</small></a></li>)}
+    </ul>
+  ) : <p class="empty">아직 태그가 없습니다.</p>}
+</Base>

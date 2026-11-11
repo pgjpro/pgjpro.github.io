@@ -3,33 +3,130 @@ import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import Cover from '../components/Cover.astro';
 import { getPosts } from '../lib';
-import { SITE, fmtDate } from '../site';
+import { SITE, INTERESTS, CATEGORIES, fmtDate } from '../site';
 const all = await getPosts();
-const [feat, ...rest] = all;
+const feat = all.find((p) => p.data.featured) ?? all[0];
+const roadmap = all.filter((p) => p.data.roadmap).sort((a, b) => a.data.roadmap! - b.data.roadmap!);
+const projects = all.filter((p) => p.data.category === 'Projects').slice(0, 3);
+const recent = all.slice(0, 6);
+const byCat = (c: string) => all.filter((p) => p.data.category === c).slice().reverse().slice(0, 4);
+const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
 ---
 <Base current="home">
+  <!-- 1. 소개 + 무엇이 궁금한지 고르기 -->
   <section class="intro">
     <p class="hello">{SITE.tagline}</p>
     <h1>광고를 운영하며 배우고<br />성장한 과정을 기록합니다</h1>
   </section>
 
+  <section class="picker" aria-labelledby="picker-h">
+    <h2 id="picker-h">무엇이 궁금해서 오셨나요?</h2>
+    <div class="pick-tabs" role="tablist">
+      {INTERESTS.map((it, i) => (
+        <button role="tab" id={`pt-${i}`} aria-controls={`pp-${i}`} aria-selected={i === 0 ? 'true' : 'false'}>{it.label}</button>
+      ))}
+    </div>
+    {INTERESTS.map((it, i) => {
+      const list = byCat(it.cat);
+      return (
+        <div class="pick-panel" role="tabpanel" id={`pp-${i}`} aria-labelledby={`pt-${i}`} data-i={i}>
+          <p class="pick-lead">{it.lead}</p>
+          {list.length ? (
+            <ol class="pick-list">
+              {list.map((p) => <li><a href={`/posts/${p.id}/`}>{p.data.title}</a></li>)}
+            </ol>
+          ) : (
+            <p class="pick-empty">아직 준비 중인 주제입니다. 곧 첫 글을 올리겠습니다.</p>
+          )}
+          <a class="more" href={`/category/${slug(it.cat)}/`}>{it.cat} 글 모두 보기 <span aria-hidden="true">→</span></a>
+        </div>
+      );
+    })}
+  </section>
+
+  <!-- 2. 대표 글 -->
   {feat && (
-    <a class="feature" href={`/posts/${feat.id}/`}>
-      <Cover post={feat} />
-      <div class="f-body">
-        <p class="meta"><span class="cat">{feat.data.category}</span><time datetime={feat.data.date.toISOString()}>{fmtDate(feat.data.date)}</time></p>
-        <h2>{feat.data.title}{feat.data.draft && <em class="draft">작성 중</em>}</h2>
-        {feat.data.answer && <p class="sum">{feat.data.answer}</p>}
-        <span class="more">읽어보기 <span aria-hidden="true">→</span></span>
-      </div>
-    </a>
+    <section class="block">
+      <div class="sec-head"><h2>대표 글</h2></div>
+      <a class="feature" href={`/posts/${feat.id}/`}>
+        <Cover post={feat} />
+        <div class="f-body">
+          <p class="meta"><span class="cat">{feat.data.category}</span><time datetime={feat.data.date.toISOString()}>{fmtDate(feat.data.date)}</time></p>
+          <h3>{feat.data.title}{feat.data.draft && <em class="draft">작성 중</em>}</h3>
+          {feat.data.answer && <p class="sum">{feat.data.answer}</p>}
+          <span class="more">읽어보기 <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </section>
   )}
 
-  <section class="latest">
-    <div class="sec-head">
-      <h2>최근 글</h2>
-      <a href="/posts/">전체 보기 <span aria-hidden="true">→</span></a>
+  <!-- 3. 처음 오셨다면, 읽는 순서 -->
+  {roadmap.length > 0 && (
+    <section class="block">
+      <div class="sec-head"><h2>처음 오셨다면, 이 순서로 읽어 보세요</h2><a href="/start/">읽는 순서 전체 <span aria-hidden="true">→</span></a></div>
+      <ol class="steps">
+        {roadmap.slice(0, 5).map((p, i) => (
+          <li>
+            <a href={`/posts/${p.id}/`}>
+              <span class="step-no">{i + 1}</span>
+              <span class="t">
+                <span class="cat">{p.data.category}</span>
+                <span class="title">{p.data.title}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <!-- 4. 프로젝트 -->
+  {projects.length > 0 && (
+    <section class="block">
+      <div class="sec-head"><h2>프로젝트</h2><a href="/projects/">전체 보기 <span aria-hidden="true">→</span></a></div>
+      <ul class="proj">
+        {projects.map((p) => (
+          <li>
+            <a href={`/posts/${p.id}/`}>
+              <Cover post={p} />
+              <p class="meta"><span class="cat">Projects</span><time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time></p>
+              <h3>{p.data.title}</h3>
+              {p.data.answer && <p class="sum">{p.data.answer}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- 5. 쓰는 사람 -->
+  <section class="block me">
+    <div>
+      <p class="hello">이 블로그를 쓰는 사람</p>
+      <h2>{SITE.tagline}</h2>
+      <p>{SITE.about}</p>
     </div>
-    <PostList posts={(rest.length ? rest : all).slice(0, 8)} />
+    <ul class="me-links">
+      <li><a href="/about/">소개 <span aria-hidden="true">→</span></a></li>
+      <li><a href="/projects/">프로젝트 <span aria-hidden="true">→</span></a></li>
+      <li><a href="/about/#contact">연락하기 <span aria-hidden="true">→</span></a></li>
+    </ul>
   </section>
+
+  <!-- 6. 최근 글 -->
+  <section class="block">
+    <div class="sec-head"><h2>최근 글</h2><a href="/posts/">전체 보기 <span aria-hidden="true">→</span></a></div>
+    <PostList posts={recent} />
+  </section>
+
+  <script>
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('.pick-tabs [role=tab]')];
+    const panels = [...document.querySelectorAll<HTMLElement>('.pick-panel')];
+    const show = (i: number) => {
+      tabs.forEach((t, j) => t.setAttribute('aria-selected', String(i === j)));
+      panels.forEach((p, j) => (p.hidden = i !== j));
+    };
+    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+    show(0);
+  </script>
 </Base>
