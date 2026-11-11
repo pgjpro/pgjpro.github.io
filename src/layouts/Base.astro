@@ -28,16 +28,21 @@ const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
     )}
   </head>
   <body>
-    <div class="wrap">
-      <header class="site-head">
-        <a class="brand" href="/">{SITE.title}<span>?</span></a>
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/"><span class="avatar" aria-hidden="true">규</span>{SITE.title}</a>
         <nav aria-label="주요 메뉴">
           <a href="/posts/" aria-current={current === 'posts' ? 'page' : undefined}>글</a>
           <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>소개</a>
         </nav>
-      </header>
-      <main><slot /></main>
-      <footer class="site-foot">© {new Date().getFullYear()} {SITE.name}. 광고주명은 가명, 광고비는 비율로 씁니다.</footer>
-    </div>
+      </div>
+    </header>
+    <main class="wrap"><slot /></main>
+    <footer class="site-foot">
+      <div class="wrap">
+        <strong>{SITE.title}</strong>
+        <span>© {new Date().getFullYear()} {SITE.name} · 광고주명은 가명, 광고비는 비율로 씁니다.</span>
+      </div>
+    </footer>
   </body>
 </html>

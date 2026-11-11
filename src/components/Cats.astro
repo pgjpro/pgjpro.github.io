@@ -7,8 +7,8 @@ const all = await getPosts();
 const count = (c: string) => all.filter((p) => p.data.category === c).length;
 ---
 <nav class="cats" aria-label="카테고리">
-  <a href="/posts/" aria-current={!current ? 'page' : undefined}>전체<small>{all.length}</small></a>
+  <a href="/posts/" aria-current={!current ? 'page' : undefined}>전체 <small>{all.length}</small></a>
   {SITE.categories.map((c) => (
-    <a href={`/category/${slugOf(c)}/`} aria-current={current === c ? 'page' : undefined}>{c}<small>{count(c)}</small></a>
+    <a href={`/category/${slugOf(c)}/`} aria-current={current === c ? 'page' : undefined}>{c} <small>{count(c)}</small></a>
   ))}
 </nav>

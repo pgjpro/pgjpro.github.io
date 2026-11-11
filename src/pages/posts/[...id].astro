@@ -1,32 +1,47 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+import PostList from '../../components/PostList.astro';
 import { getPosts } from '../../lib';
-import { slugOf } from '../../site';
+import { SITE, slugOf, fmtDate, readMin } from '../../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { id: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id).slice(0, 3) } }));
 }
-const { post } = Astro.props;
+const { post, others } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
-const date = `${d.date.getFullYear()}년 ${d.date.getMonth() + 1}월 ${d.date.getDate()}일`;
-const parts = d.answer && d.number && d.answer.includes(d.number) ? d.answer.split(d.number) : null;
 ---
 <Base title={d.title} description={d.answer} current="posts">
   <article class="article">
-    <header>
-      <p class="meta">
-        <a href={`/category/${slugOf(d.category)}/`}>{d.category}</a> · <time datetime={d.date.toISOString()}>{date}</time>{d.draft && ' · 작성 중'}
-      </p>
+    <header class="a-head">
+      <a class="cat" href={`/category/${slugOf(d.category)}/`}>{d.category}</a>
       <h1>{d.title}</h1>
-      {d.answer && (
-        <p class="lead">
-          {parts ? <>{parts[0]}<span class="num">{d.number}</span>{parts.slice(1).join(d.number)}</> : d.answer}
-        </p>
-      )}
+      {d.answer && <p class="lead">{d.answer}</p>}
+      <p class="byline">
+        <span class="avatar" aria-hidden="true">규</span>
+        <span><strong>{SITE.name}</strong><br /><time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time> · {readMin(post.body)}분 읽기{d.draft && ' · 작성 중'}</span>
+      </p>
     </header>
+    <div class="a-cover"><Cover post={post} big /></div>
     <div class="prose"><Content /></div>
   </article>
+
+  <aside class="author">
+    <span class="avatar lg" aria-hidden="true">규</span>
+    <div>
+      <strong>{SITE.name}</strong>
+      <p>{SITE.role}. {SITE.description}</p>
+      <a href="/about/">소개 더 보기</a>
+    </div>
+  </aside>
+
+  {others.length > 0 && (
+    <section class="latest">
+      <div class="sec-head"><h2>다른 글</h2></div>
+      <PostList posts={others} />
+    </section>
+  )}
 </Base>

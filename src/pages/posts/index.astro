@@ -6,6 +6,6 @@ import { getPosts } from '../../lib';
 const posts = await getPosts();
 ---
 <Base title="글" current="posts">
-  <Cats />
+  <header class="page-head"><h1>전체 글</h1><Cats /></header>
   <PostList posts={posts} />
 </Base>

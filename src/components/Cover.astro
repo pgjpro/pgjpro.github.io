@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { toneOf } from '../site';
+interface Props { post: CollectionEntry<'posts'>; big?: boolean }
+const { post, big = false } = Astro.props;
+const d = post.data;
+---
+{d.cover ? (
+  <div class:list={['cover', { big }]}><img src={d.cover} alt="" loading="lazy" /></div>
+) : (
+  <div class:list={['cover', 'type', `tone-${toneOf(d.category)}`, { big }]} aria-hidden="true">
+    <span class="c-cat">{d.category}</span>
+    <span class="c-big">{d.number ?? d.category}</span>
+  </div>
+)}

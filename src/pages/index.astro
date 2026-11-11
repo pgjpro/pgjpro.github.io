@@ -1,18 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import Cover from '../components/Cover.astro';
 import Cats from '../components/Cats.astro';
 import { getPosts } from '../lib';
-const posts = (await getPosts()).slice(0, 8);
+import { SITE, fmtDate } from '../site';
+const all = await getPosts();
+const [feat, ...rest] = all;
 ---
 <Base>
-  <section class="hero">
-    <p class="q" aria-hidden="true">?</p>
-    <div>
-      <h1>당연하게 해오던 방식에<br />한 번 더 물음표를 붙입니다</h1>
-      <p>퍼포먼스 마케터 박규진의 기록입니다. 검색광고를 운영하며 생긴 질문과, 그 질문을 데이터로 확인한 과정을 씁니다.</p>
-    </div>
+  <section class="intro">
+    <p class="hello">안녕하세요, {SITE.role} 박규진입니다.</p>
+    <h1>광고를 운영하며 배우고<br />성장한 과정을 기록합니다</h1>
   </section>
-  <Cats />
-  <PostList posts={posts} />
+
+  {feat && (
+    <a class="feature" href={`/posts/${feat.id}/`}>
+      <Cover post={feat} big />
+      <div class="f-body">
+        <p class="meta"><span class="cat">{feat.data.category}</span><time datetime={feat.data.date.toISOString()}>{fmtDate(feat.data.date)}</time></p>
+        <h2>{feat.data.title}{feat.data.draft && <em class="draft">작성 중</em>}</h2>
+        {feat.data.answer && <p class="sum">{feat.data.answer}</p>}
+        <span class="more">읽어 보기</span>
+      </div>
+    </a>
+  )}
+
+  <section class="latest">
+    <div class="sec-head">
+      <h2>최근 글</h2>
+      <Cats />
+    </div>
+    <PostList posts={rest.length ? rest : all} />
+  </section>
 </Base>

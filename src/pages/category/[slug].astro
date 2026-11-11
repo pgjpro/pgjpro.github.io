@@ -12,6 +12,6 @@ const { cat } = Astro.props;
 const posts = (await getPosts()).filter((p) => p.data.category === cat);
 ---
 <Base title={cat} current="posts">
-  <Cats current={cat} />
+  <header class="page-head"><h1>{cat}</h1><Cats current={cat} /></header>
   <PostList posts={posts} />
 </Base>

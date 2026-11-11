@@ -1,25 +1,21 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Cover from './Cover.astro';
+import { fmtDate } from '../site';
 interface Props { posts: CollectionEntry<'posts'>[] }
 const { posts } = Astro.props;
-const fmt = (d: Date) =>
-  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-// answer 안의 number 를 형광펜으로 감싼다
-const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' } as Record<string, string>)[c]);
-const mark = (a = '', n?: string) =>
-  !n || !a.includes(n) ? esc(a) : a.split(n).map(esc).join(`<span class="num">${esc(n)}</span>`);
 ---
 {posts.length === 0 ? (
-  <p class="empty">아직 글이 없습니다. src/content/posts 에 첫 글을 추가해 보세요.</p>
+  <p class="empty">아직 글이 없습니다. 첫 글은 src/content/posts 에 추가합니다.</p>
 ) : (
-  <ul class="posts">
+  <ul class="grid">
     {posts.map((p) => (
       <li>
-        <a href={`/posts/${p.id}/`}>
-          <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
-          <h2>{p.data.title}{p.data.draft && ' (작성 중)'}</h2>
-          {p.data.answer && <p class="answer" set:html={mark(p.data.answer, p.data.number)} />}
-          <span class="cat">{p.data.category}</span>
+        <a class="card" href={`/posts/${p.id}/`}>
+          <Cover post={p} />
+          <p class="meta"><span class="cat">{p.data.category}</span><time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time></p>
+          <h3>{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</h3>
+          {p.data.answer && <p class="sum">{p.data.answer}</p>}
         </a>
       </li>
     ))}
