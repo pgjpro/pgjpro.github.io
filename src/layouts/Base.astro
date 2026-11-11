@@ -17,6 +17,19 @@ const nav = [
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
+    {SITE.ga4 && (
+      <>
+        <!-- Google tag (gtag.js) -->
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}`}></script>
+        <script is:inline set:html={`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${SITE.ga4}');
+`} />
+      </>
+    )}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -39,16 +52,6 @@ const nav = [
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-    {SITE.ga4 && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}`}></script>
-        <script is:inline define:vars={{ id: SITE.ga4 }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
-          gtag('js', new Date()); gtag('config', id);
-        </script>
-      </>
-    )}
   </head>
   <body>
     <header class="site-head">
