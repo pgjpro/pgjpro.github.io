@@ -6,9 +6,7 @@ const { title, description = SITE.description, current } = Astro.props;
 const pageTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} | ${SITE.tagline}`;
 const nav = [
   { href: '/', label: '홈', key: 'home' },
-  { href: '/start/', label: '읽는 순서', key: 'start' },
-  { href: '/posts/', label: '글 목록', key: 'posts' },
-  { href: '/category/', label: '카테고리', key: 'category' },
+  { href: '/posts/', label: '글', key: 'posts' },
   { href: '/projects/', label: '프로젝트', key: 'projects' },
   { href: '/about/', label: '소개', key: 'about' },
 ];
@@ -65,8 +63,8 @@ const nav = [
           <div>
             <h2>둘러보기</h2>
             <ul>
-              <li><a href="/start/">읽는 순서</a></li>
-              <li><a href="/posts/">글 목록</a></li>
+              <li><a href="/posts/">글</a></li>
+              <li><a href="/category/">카테고리</a></li>
               <li><a href="/projects/">프로젝트</a></li>
               <li><a href="/tags/">태그</a></li>
             </ul>
@@ -79,6 +77,7 @@ const nav = [
             <h2>About</h2>
             <ul>
               <li><a href="/about/">소개</a></li>
+              <li><a href="/about/#now">요즘</a></li>
               <li><a href="/about/#contact">연락하기</a></li>
             </ul>
           </div>

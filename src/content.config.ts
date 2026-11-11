@@ -13,7 +13,6 @@ const posts = defineCollection({
     date: z.coerce.date(),
     category: z.enum(CATEGORY_NAMES as [string, ...string[]]), // Marketing | AI & Automation | Projects | Journal
     tags: z.array(z.string()).default([]),   // 검색어가 될 만한 단어
-    roadmap: z.number().optional(),          // "읽는 순서" 순번
     featured: z.boolean().default(false),    // 홈 대표 글
     draft: z.boolean().default(false),
   }),

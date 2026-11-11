@@ -6,7 +6,6 @@ number: 10~20분
 date: 2026-11-09
 category: Projects
 tags: [대시보드, 자동화, Metabase]
-roadmap: 3
 draft: true
 ---
 

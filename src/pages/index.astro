@@ -2,18 +2,18 @@
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import Cover from '../components/Cover.astro';
+import Now from '../components/Now.astro';
 import { getPosts } from '../lib';
-import { SITE, INTERESTS, CATEGORIES, fmtDate } from '../site';
+import { SITE, CATEGORIES, fmtDate } from '../site';
 const all = await getPosts();
-const feat = all.find((p) => p.data.featured) ?? all[0];
-const roadmap = all.filter((p) => p.data.roadmap).sort((a, b) => a.data.roadmap! - b.data.roadmap!);
-const projects = all.filter((p) => p.data.category === 'Projects').slice(0, 3);
-const recent = all.slice(0, 6);
-const byCat = (c: string) => all.filter((p) => p.data.category === c).slice().reverse().slice(0, 4);
-const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
+// 대표 글: featured 로 고른 글 최대 3개 (없으면 최신 글 1개)
+const picked = all.filter((p) => p.data.featured).slice(0, 3);
+const featured = picked.length ? picked : all.slice(0, 1);
+const recent = all.filter((p) => !featured.includes(p)).slice(0, 6);
+const count = (c: string) => all.filter((p) => p.data.category === c).length;
 ---
 <Base current="home">
-  <!-- 1. 소개 + 무엇이 궁금한지 고르기 -->
+  <!-- 1. 대문 소개 -->
   <section class="intro">
     <h1>{SITE.tagline}</h1>
     <p class="intro-lead">
@@ -27,78 +27,36 @@ const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
     </ul>
   </section>
 
-  <section class="picker" aria-labelledby="picker-h">
-    <h2 id="picker-h">무엇이 궁금해서 오셨나요?</h2>
-    <div class="pick-tabs" role="tablist">
-      {INTERESTS.map((it, i) => (
-        <button role="tab" id={`pt-${i}`} aria-controls={`pp-${i}`} aria-selected={i === 0 ? 'true' : 'false'}>{it.label}</button>
-      ))}
-    </div>
-    {INTERESTS.map((it, i) => {
-      const list = byCat(it.cat);
-      return (
-        <div class="pick-panel" role="tabpanel" id={`pp-${i}`} aria-labelledby={`pt-${i}`} data-i={i}>
-          <p class="pick-lead">{it.lead}</p>
-          {list.length ? (
-            <ol class="pick-list">
-              {list.map((p) => <li><a href={`/posts/${p.id}/`}>{p.data.title}</a></li>)}
-            </ol>
-          ) : (
-            <p class="pick-empty">아직 준비 중인 주제입니다. 곧 첫 글을 올리겠습니다.</p>
-          )}
-          <a class="more" href={`/category/${slug(it.cat)}/`}>{it.cat} 글 모두 보기 <span aria-hidden="true">→</span></a>
-        </div>
-      );
-    })}
-  </section>
+  <!-- 2. 요즘 -->
+  <Now />
 
-  <!-- 2. 대표 글 -->
-  {feat && (
+  <!-- 3. 대표 글 -->
+  {featured.length === 1 && (
     <section class="block">
       <div class="sec-head"><h2>대표 글</h2></div>
-      <a class="feature" href={`/posts/${feat.id}/`}>
-        <Cover post={feat} />
-        <div class="f-body">
-          <p class="meta"><span class="cat">{feat.data.category}</span><time datetime={feat.data.date.toISOString()}>{fmtDate(feat.data.date)}</time></p>
-          <h3>{feat.data.title}{feat.data.draft && <em class="draft">작성 중</em>}</h3>
-          {feat.data.answer && <p class="sum">{feat.data.answer}</p>}
-          <span class="more">읽어보기 <span aria-hidden="true">→</span></span>
-        </div>
-      </a>
+      {featured.map((p) => (
+        <a class="feature" href={`/posts/${p.id}/`}>
+          <Cover post={p} />
+          <div class="f-body">
+            <p class="meta"><span class="cat">{p.data.category}</span><time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time></p>
+            <h3>{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</h3>
+            {p.data.answer && <p class="sum">{p.data.answer}</p>}
+            <span class="more">읽어보기 <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      ))}
     </section>
   )}
-
-  <!-- 3. 처음 오셨다면, 읽는 순서 -->
-  {roadmap.length > 0 && (
+  {featured.length > 1 && (
     <section class="block">
-      <div class="sec-head"><h2>처음 오셨다면, 이 순서로 읽어 보세요</h2><a href="/start/">읽는 순서 전체 <span aria-hidden="true">→</span></a></div>
-      <ol class="steps">
-        {roadmap.slice(0, 5).map((p, i) => (
-          <li>
-            <a href={`/posts/${p.id}/`}>
-              <span class="step-no">{i + 1}</span>
-              <span class="t">
-                <span class="cat">{p.data.category}</span>
-                <span class="title">{p.data.title}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </section>
-  )}
-
-  <!-- 4. 프로젝트 -->
-  {projects.length > 0 && (
-    <section class="block">
-      <div class="sec-head"><h2>프로젝트</h2><a href="/projects/">전체 보기 <span aria-hidden="true">→</span></a></div>
+      <div class="sec-head"><h2>대표 글</h2></div>
       <ul class="proj">
-        {projects.map((p) => (
+        {featured.map((p) => (
           <li>
             <a href={`/posts/${p.id}/`}>
               <Cover post={p} />
-              <p class="meta"><span class="cat">Projects</span><time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time></p>
-              <h3>{p.data.title}</h3>
+              <p class="meta"><span class="cat">{p.data.category}</span><time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time></p>
+              <h3>{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</h3>
               {p.data.answer && <p class="sum">{p.data.answer}</p>}
             </a>
           </li>
@@ -107,21 +65,27 @@ const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
     </section>
   )}
 
-
-  <!-- 6. 최근 글 -->
+  <!-- 4. 최근 글 -->
   <section class="block">
     <div class="sec-head"><h2>최근 글</h2><a href="/posts/">전체 보기 <span aria-hidden="true">→</span></a></div>
     <PostList posts={recent} />
   </section>
 
-  <script>
-    const tabs = [...document.querySelectorAll<HTMLButtonElement>('.pick-tabs [role=tab]')];
-    const panels = [...document.querySelectorAll<HTMLElement>('.pick-panel')];
-    const show = (i: number) => {
-      tabs.forEach((t, j) => t.setAttribute('aria-selected', String(i === j)));
-      panels.forEach((p, j) => (p.hidden = i !== j));
-    };
-    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
-    show(0);
-  </script>
+  <!-- 5. 인기 글: GA4 데이터가 쌓이면 추가 -->
+
+  <!-- 6. 주제로 둘러보기 -->
+  <section class="block">
+    <div class="sec-head"><h2>주제로 둘러보기</h2></div>
+    <ul class="topics">
+      {CATEGORIES.map((c) => (
+        <li>
+          <a href={`/category/${c.slug}/`}>
+            <span class="name">{c.name}</span>
+            <span class="desc">{c.desc}</span>
+            <span class="count">글 {count(c.name)}개</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
 </Base>

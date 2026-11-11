@@ -1,0 +1,16 @@
+---
+// "요즘" — src/data/now.json 에서 읽음 (글쓰기 화면 /admin 에서 수정 가능)
+import now from '../data/now.json';
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+const [y, m, d] = now.updated.split('-');
+---
+<section class:list={['now', { full }]} id="now" aria-labelledby="now-h">
+  <div class="now-head">
+    <h2 id="now-h">요즘</h2>
+    <span class="now-date">{y}.{m}.{d} 업데이트</span>
+  </div>
+  <ul>
+    {now.items.map((it) => <li>{it}</li>)}
+  </ul>
+</section>

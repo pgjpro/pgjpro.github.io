@@ -259,3 +259,29 @@ img { max-width: 100%; height: auto; display: block; }
 .intro-links a { border-bottom: 1.5px solid var(--charcoal); padding-bottom: 1px; }
 .intro-links a:hover { color: var(--blue); border-color: var(--blue); }
 @media (max-width: 40rem) { .intro-lead br { display: none; } }
+
+/* 요즘 (Now) */
+.now { margin-bottom: 3rem; padding: 1.5rem 1.75rem; background: #fff; border: 1px solid var(--gray); border-radius: 14px; }
+.now.full { margin: 2.5rem 0 0; }
+.now-head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.6rem; }
+.now h2 { margin: 0; font-size: 1.1rem; letter-spacing: -0.03em; }
+.now h2::before { content: ''; display: inline-block; width: 0.5rem; height: 0.5rem; margin-right: 0.5rem; border-radius: 50%; background: var(--blue); vertical-align: 0.15em; box-shadow: 0 0 0 4px var(--tint); }
+.now-date { font-size: 0.8rem; color: var(--faint); }
+.now ul { margin: 0; padding-left: 1.2rem; color: var(--sub); }
+.now li { padding-block: 0.15rem; }
+.now li::marker { color: var(--lavender); }
+
+/* 주제로 둘러보기 */
+.topics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.topics a { display: flex; flex-direction: column; gap: 0.15rem; height: 100%; padding: 1.1rem 1.25rem; background: #fff; border: 1px solid var(--gray); border-radius: 12px; }
+.topics a:hover { border-color: var(--lavender); }
+.topics .name { color: var(--blue); font-weight: 700; }
+.topics .desc { color: var(--charcoal); font-size: 0.95rem; }
+.topics .count { color: var(--faint); font-size: 0.8rem; margin-top: 0.25rem; }
+
+/* 글 목록 연도 구분 */
+.year { padding-top: 1.75rem; }
+.year-h { margin: 0 0 0.25rem; font-size: 1.05rem; letter-spacing: -0.02em; }
+.year-h small { color: var(--faint); font-weight: 500; margin-left: 0.25rem; }
+
+@media (max-width: 40rem) { .topics { grid-template-columns: 1fr; } }

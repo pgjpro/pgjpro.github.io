@@ -6,7 +6,6 @@ number: 약 14.6만 원
 date: 2026-11-10
 category: Marketing
 tags: [GA4, GTM, 전환 측정, 파워링크]
-roadmap: 2
 draft: true
 ---
 

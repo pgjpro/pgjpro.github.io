@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Now from '../components/Now.astro';
 import { SITE, CATEGORIES } from '../site';
 ---
 <Base title="소개" current="about">
@@ -8,6 +9,7 @@ import { SITE, CATEGORIES } from '../site';
     <h1>{SITE.tagline}</h1>
     <p class="lead">{SITE.about}</p>
     <p>[여기에 직접 소개 글을 더 써 주세요]</p>
+    <Now full />
     <dl>
       <dt>지금</dt><dd>{SITE.role}</dd>
       <dt>다루는 것</dt><dd>네이버 검색광고, GFA, Meta, GA4, GTM, SQL, Metabase</dd>

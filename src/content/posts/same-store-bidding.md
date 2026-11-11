@@ -6,7 +6,6 @@ number: 2.2배
 date: 2026-11-11
 category: Marketing
 tags: [네이버 쇼핑검색, 입찰 전략, ROAS]
-roadmap: 1
 featured: true
 draft: true
 ---
