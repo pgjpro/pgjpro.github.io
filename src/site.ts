@@ -1,6 +1,6 @@
 export const SITE = {
   name: '박규진',
-  title: '박규진의 마케팅 기록',
+  title: '마케터 P',
   tagline: '퍼포먼스 마케터 박규진입니다.',
   role: '광고대행사 퍼포먼스 마케터(AE)',
   description:
