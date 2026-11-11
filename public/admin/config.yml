@@ -1,0 +1,55 @@
+# 블로그 글쓰기 화면 설정 (https://marketerpark.co.kr/admin/)
+# 저장소에 쓰기 권한이 있는 GitHub 계정(pgjpro)만 로그인해서 글을 쓸 수 있습니다.
+backend:
+  name: github
+  repo: pgjpro/pgjpro.github.io
+  branch: main
+  commit_messages:
+    create: "글 추가: {{slug}}"
+    update: "글 수정: {{slug}}"
+    delete: "글 삭제: {{slug}}"
+    uploadMedia: "이미지 추가: {{path}}"
+    deleteMedia: "이미지 삭제: {{path}}"
+
+site_url: https://marketerpark.co.kr
+display_url: https://marketerpark.co.kr
+locale: ko
+
+# 표지·본문 이미지는 public/covers 에 저장 → 사이트에서는 /covers/파일명
+media_folder: public/covers
+public_folder: /covers
+
+collections:
+  - name: posts
+    label: 글
+    label_singular: 글
+    folder: src/content/posts
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{fields.slug}}"
+    summary: "{{title}} · {{category}} · {{date | date('YYYY.MM.DD')}}{{draft | ternary(' · 작성 중', '')}}"
+    sortable_fields: [date, title, category]
+    view_filters:
+      - { label: 작성 중, field: draft, pattern: true }
+      - { label: 공개됨, field: draft, pattern: false }
+    fields:
+      - { name: title, label: 제목, widget: string }
+      - name: slug
+        label: 글 주소 (영어, 하이픈)
+        hint: "예: ga4-inquiry-tracking → marketerpark.co.kr/posts/ga4-inquiry-tracking/ . 검색에 잡히도록 내용이 드러나는 영어로"
+        widget: string
+        pattern: ['^[a-z0-9-]+$', '영어 소문자, 숫자, 하이픈(-)만 쓸 수 있어요']
+      - { name: answer, label: 한 줄 요약, widget: text, required: false, hint: 대표 글과 글 맨 위에 보입니다 }
+      - { name: number, label: 핵심 숫자, widget: string, required: false, hint: "대표 글 표지에 크게 보입니다 (예: 2.2배)" }
+      - { name: cover, label: 표지 이미지, widget: image, required: false }
+      - { name: date, label: 날짜, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false }
+      - name: category
+        label: 카테고리
+        widget: select
+        options: [Marketing, AI & Automation, Projects, Journal]
+      - { name: tags, label: 태그, widget: list, required: false, hint: "검색어가 될 만한 단어 2~4개 (쉼표로 구분)" }
+      - { name: roadmap, label: 읽는 순서 번호, widget: number, value_type: int, required: false, hint: 읽는 순서에 넣을 때만 }
+      - { name: featured, label: 홈 대표 글, widget: boolean, default: false }
+      - { name: draft, label: 작성 중 (사이트에 숨김), widget: boolean, default: true }
+      - { name: body, label: 본문, widget: markdown }

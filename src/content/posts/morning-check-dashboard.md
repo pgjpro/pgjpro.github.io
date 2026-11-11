@@ -1,4 +1,5 @@
 ---
+slug: morning-check-dashboard
 title: 매일 아침 2시간 걸리던 계정 점검, 꼭 하나씩 열어 봐야 할까
 answer: 이상 계정만 골라 보는 대시보드를 만들어 아침 점검을 10~20분으로 줄였다
 number: 10~20분

@@ -1,4 +1,5 @@
 ---
+slug: same-store-bidding
 title: 자사 상품끼리 상단을 두고 입찰 경쟁을 하고 있었다
 answer: 노출순위 구간별로 나눠 보니, 상단 노출을 줄였을 때 구매 ROAS가 2.2배가 됐다
 number: 2.2배

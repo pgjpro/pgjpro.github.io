@@ -1,4 +1,5 @@
 ---
+slug: inquiry-kpi-ga4
 title: 문의형 광고주의 KPI는 어떻게 재야 할까
 answer: GA4로 문의 버튼 클릭을 세어 보니, 파워링크의 리드당 비용이 약 14.6만 원이었다
 number: 약 14.6만 원

@@ -252,3 +252,10 @@ img { max-width: 100%; height: auto; display: block; }
   .proj { grid-template-columns: 1fr; }
   .me { grid-template-columns: 1fr; }
 }
+
+/* 홈 대문 = 소개글 */
+.intro-lead { margin: 1.25rem 0 0; max-width: 40rem; font-size: clamp(1.02rem, 1.6vw, 1.15rem); line-height: 1.8; color: var(--sub); }
+.intro-links { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-weight: 600; font-size: 0.95rem; }
+.intro-links a { border-bottom: 1.5px solid var(--charcoal); padding-bottom: 1px; }
+.intro-links a:hover { color: var(--blue); border-color: var(--blue); }
+@media (max-width: 40rem) { .intro-lead br { display: none; } }

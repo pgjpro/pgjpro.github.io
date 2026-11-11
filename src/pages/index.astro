@@ -15,8 +15,16 @@ const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
 <Base current="home">
   <!-- 1. 소개 + 무엇이 궁금한지 고르기 -->
   <section class="intro">
-    <p class="hello">{SITE.tagline}</p>
-    <h1>광고를 운영하며 배우고<br />성장한 과정을 기록합니다</h1>
+    <h1>{SITE.tagline}</h1>
+    <p class="intro-lead">
+      퍼포먼스 마케터로 일하며 마주한 문제와 실험, 그리고 배운 점을 기록합니다.<br />
+      이 블로그는 저의 성장 과정이자, 같은 고민을 하는 사람에게 건네는 작은 정리 노트입니다.
+    </p>
+    <ul class="intro-links">
+      <li><a href="/about/">소개 <span aria-hidden="true">→</span></a></li>
+      <li><a href="/projects/">프로젝트 <span aria-hidden="true">→</span></a></li>
+      <li><a href="/about/#contact">연락하기 <span aria-hidden="true">→</span></a></li>
+    </ul>
   </section>
 
   <section class="picker" aria-labelledby="picker-h">
@@ -99,19 +107,6 @@ const slug = (c: string) => CATEGORIES.find((x) => x.name === c)!.slug;
     </section>
   )}
 
-  <!-- 5. 쓰는 사람 -->
-  <section class="block me">
-    <div>
-      <p class="hello">이 블로그를 쓰는 사람</p>
-      <h2>{SITE.tagline}</h2>
-      <p>{SITE.about}</p>
-    </div>
-    <ul class="me-links">
-      <li><a href="/about/">소개 <span aria-hidden="true">→</span></a></li>
-      <li><a href="/projects/">프로젝트 <span aria-hidden="true">→</span></a></li>
-      <li><a href="/about/#contact">연락하기 <span aria-hidden="true">→</span></a></li>
-    </ul>
-  </section>
 
   <!-- 6. 최근 글 -->
   <section class="block">
