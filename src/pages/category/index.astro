@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib';
+import { CATEGORIES } from '../../site';
+const all = await getPosts();
+const count = (c: string) => all.filter((p) => p.data.category === c).length;
+---
+<Base title="카테고리" current="category">
+  <header class="page-head"><h1>카테고리</h1></header>
+  <ul class="pillars">
+    {CATEGORIES.map((c) => (
+      <li>
+        <a href={`/category/${c.slug}/`}>
+          <span class="name">{c.name}</span>
+          <span class="desc">{c.desc}</span>
+          <span class="count">글 {count(c.name)}개</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

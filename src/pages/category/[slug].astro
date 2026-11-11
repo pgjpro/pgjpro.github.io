@@ -3,15 +3,19 @@ import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import Cats from '../../components/Cats.astro';
 import { getPosts } from '../../lib';
-import { SITE, slugOf } from '../../site';
+import { CATEGORIES } from '../../site';
 
 export function getStaticPaths() {
-  return SITE.categories.map((c) => ({ params: { slug: slugOf(c) }, props: { cat: c } }));
+  return CATEGORIES.map((c) => ({ params: { slug: c.slug }, props: { cat: c } }));
 }
 const { cat } = Astro.props;
-const posts = (await getPosts()).filter((p) => p.data.category === cat);
+const posts = (await getPosts()).filter((p) => p.data.category === cat.name);
 ---
-<Base title={cat} current="posts">
-  <header class="page-head"><h1>{cat}</h1><Cats current={cat} /></header>
-  <PostList posts={posts} />
+<Base title={cat.name} current="category">
+  <header class="page-head">
+    <h1>{cat.name}</h1>
+    <p class="desc">{cat.desc}</p>
+    <Cats current={cat.name} />
+  </header>
+  <PostList posts={posts} withSum />
 </Base>

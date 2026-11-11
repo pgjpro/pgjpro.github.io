@@ -1,14 +1,13 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Cover from '../../components/Cover.astro';
 import PostList from '../../components/PostList.astro';
 import { getPosts } from '../../lib';
 import { SITE, slugOf, fmtDate, readMin } from '../../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { id: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id).slice(0, 3) } }));
+  return posts.map((post) => ({ params: { id: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id).slice(0, 4) } }));
 }
 const { post, others } = Astro.props;
 const { Content } = await render(post);
@@ -20,27 +19,21 @@ const d = post.data;
       <a class="cat" href={`/category/${slugOf(d.category)}/`}>{d.category}</a>
       <h1>{d.title}</h1>
       {d.answer && <p class="lead">{d.answer}</p>}
-      <p class="byline">
-        <span class="avatar" aria-hidden="true">규</span>
-        <span><strong>{SITE.name}</strong><br /><time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time> · {readMin(post.body)}분 읽기{d.draft && ' · 작성 중'}</span>
-      </p>
+      <p class="byline">{SITE.name} · <time datetime={d.date.toISOString()}>{fmtDate(d.date)}</time> · {readMin(post.body)}분 읽기{d.draft && ' · 작성 중'}</p>
     </header>
-    <div class="a-cover"><Cover post={post} big /></div>
+    {d.cover && <div class="a-cover"><img src={d.cover} alt="" /></div>}
     <div class="prose"><Content /></div>
   </article>
 
   <aside class="author">
-    <span class="avatar lg" aria-hidden="true">규</span>
-    <div>
-      <strong>{SITE.name}</strong>
-      <p>{SITE.role}. {SITE.description}</p>
-      <a href="/about/">소개 더 보기</a>
-    </div>
+    <strong>{SITE.tagline}</strong>
+    <p>{SITE.about}</p>
+    <a href="/about/">소개 더 보기 <span aria-hidden="true">→</span></a>
   </aside>
 
   {others.length > 0 && (
     <section class="latest">
-      <div class="sec-head"><h2>다른 글</h2></div>
+      <div class="sec-head"><h2>다른 글</h2><a href="/posts/">전체 보기 <span aria-hidden="true">→</span></a></div>
       <PostList posts={others} />
     </section>
   )}

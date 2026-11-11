@@ -1,5 +1,5 @@
 ---
-import { SITE, slugOf } from '../site';
+import { CATEGORIES } from '../site';
 import { getPosts } from '../lib';
 interface Props { current?: string }
 const { current } = Astro.props;
@@ -8,7 +8,7 @@ const count = (c: string) => all.filter((p) => p.data.category === c).length;
 ---
 <nav class="cats" aria-label="카테고리">
   <a href="/posts/" aria-current={!current ? 'page' : undefined}>전체 <small>{all.length}</small></a>
-  {SITE.categories.map((c) => (
-    <a href={`/category/${slugOf(c)}/`} aria-current={current === c ? 'page' : undefined}>{c} <small>{count(c)}</small></a>
+  {CATEGORIES.map((c) => (
+    <a href={`/category/${c.slug}/`} aria-current={current === c.name ? 'page' : undefined}>{c.name} <small>{count(c.name)}</small></a>
   ))}
 </nav>

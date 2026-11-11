@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib';
+import { CATEGORIES } from '../site';
+const cat = CATEGORIES.find((c) => c.slug === 'projects')!;
+const posts = (await getPosts()).filter((p) => p.data.category === cat.name);
+---
+<Base title="프로젝트" current="projects">
+  <header class="page-head">
+    <h1>프로젝트</h1>
+    <p class="desc">{cat.desc}</p>
+  </header>
+  <PostList posts={posts} withSum />
+</Base>

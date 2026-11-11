@@ -1,15 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../site';
+import { SITE, CATEGORIES } from '../site';
 ---
 <Base title="소개" current="about">
   <section class="about">
-    <span class="avatar xl" aria-hidden="true">규</span>
-    <h1>{SITE.title}</h1>
-    <p class="lead">[여기에 직접 소개 글을 써 주세요]</p>
+    <p class="hello">About</p>
+    <h1>{SITE.tagline}</h1>
+    <p class="lead">{SITE.about}</p>
+    <p>[여기에 직접 소개 글을 더 써 주세요]</p>
     <dl>
       <dt>지금</dt><dd>{SITE.role}</dd>
       <dt>다루는 것</dt><dd>네이버 검색광고, GFA, Meta, GA4, GTM, SQL, Metabase</dd>
+      <dt>쓰는 글</dt><dd>{CATEGORIES.map((c) => c.name).join(', ')}</dd>
       <dt>포트폴리오</dt><dd>[포트폴리오 링크]</dd>
       <dt>연락</dt><dd>[연락처]</dd>
     </dl>
