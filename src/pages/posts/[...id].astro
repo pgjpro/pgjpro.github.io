@@ -12,8 +12,26 @@ export async function getStaticPaths() {
 const { post, others } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
+const url = new URL(`/posts/${post.id}/`, SITE.url).href;
+// 검색엔진용 구조화 데이터 (글 정보)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description: d.answer ?? SITE.description,
+  datePublished: d.date.toISOString(),
+  dateModified: d.date.toISOString(),
+  inLanguage: 'ko-KR',
+  mainEntityOfPage: url,
+  url,
+  image: new URL(d.cover ?? '/og.png', SITE.url).href,
+  articleSection: d.category,
+  keywords: d.tags.join(', '),
+  author: { '@type': 'Person', name: SITE.name, url: new URL('/about/', SITE.url).href },
+  publisher: { '@type': 'Person', name: SITE.name },
+};
 ---
-<Base title={d.title} description={d.answer} current="posts">
+<Base title={d.title} description={d.answer} current="posts" type="article" jsonLd={jsonLd} image={d.cover}>
   <article class="article">
     <header class="a-head">
       <a class="cat" href={`/category/${slugOf(d.category)}/`}>{d.category}</a>

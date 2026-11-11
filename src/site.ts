@@ -9,6 +9,9 @@ export const SITE = {
     '퍼포먼스 마케터로 일하며 마주한 문제와 실험, 그리고 배운 점을 기록합니다. 이 블로그는 저의 성장 과정이자, 같은 고민을 하는 사람에게 건네는 작은 정리 노트입니다.',
   // GA4 측정 ID (예: G-XXXXXXX). 비워 두면 추적 코드를 넣지 않습니다.
   ga4: '',
+  // 검색엔진 소유 확인 코드 (Search Console·서치어드바이저에서 받은 content 값만)
+  verify: { google: '', naver: '' },
+  url: 'https://marketerpark.co.kr',
 };
 
 // 콘텐츠 필라 = 카테고리

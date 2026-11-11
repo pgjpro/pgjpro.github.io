@@ -11,8 +11,16 @@ const picked = all.filter((p) => p.data.featured).slice(0, 3);
 const featured = picked.length ? picked : all.slice(0, 1);
 const recent = all.filter((p) => !featured.includes(p)).slice(0, 6);
 const count = (c: string) => all.filter((p) => p.data.category === c).length;
+// 검색엔진용 구조화 데이터 (사이트 + 운영자)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', name: SITE.title, url: SITE.url + '/', inLanguage: 'ko-KR', description: SITE.description },
+    { '@type': 'Person', name: SITE.name, jobTitle: '퍼포먼스 마케터', url: SITE.url + '/about/', description: SITE.about },
+  ],
+};
 ---
-<Base current="home">
+<Base current="home" jsonLd={jsonLd}>
   <!-- 1. 대문 소개 -->
   <section class="intro">
     <h1>{SITE.tagline}</h1>
