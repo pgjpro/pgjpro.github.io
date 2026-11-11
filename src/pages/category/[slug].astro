@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import Cats from '../../components/Cats.astro';
+import { getPosts } from '../../lib';
+import { SITE, slugOf } from '../../site';
+
+export function getStaticPaths() {
+  return SITE.categories.map((c) => ({ params: { slug: slugOf(c) }, props: { cat: c } }));
+}
+const { cat } = Astro.props;
+const posts = (await getPosts()).filter((p) => p.data.category === cat);
+---
+<Base title={cat} current="posts">
+  <Cats current={cat} />
+  <PostList posts={posts} />
+</Base>

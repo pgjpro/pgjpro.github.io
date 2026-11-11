@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { SITE } from '../site';
+interface Props { title?: string; description?: string; current?: string }
+const { title, description = SITE.description, current } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    {SITE.ga4 && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}`}></script>
+        <script is:inline define:vars={{ id: SITE.ga4 }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date()); gtag('config', id);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-head">
+        <a class="brand" href="/">{SITE.title}<span>?</span></a>
+        <nav aria-label="주요 메뉴">
+          <a href="/posts/" aria-current={current === 'posts' ? 'page' : undefined}>글</a>
+          <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>소개</a>
+        </nav>
+      </header>
+      <main><slot /></main>
+      <footer class="site-foot">© {new Date().getFullYear()} {SITE.name}. 광고주명은 가명, 광고비는 비율로 씁니다.</footer>
+    </div>
+  </body>
+</html>

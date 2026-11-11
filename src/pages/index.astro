@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import Cats from '../components/Cats.astro';
+import { getPosts } from '../lib';
+const posts = (await getPosts()).slice(0, 8);
+---
+<Base>
+  <section class="hero">
+    <p class="q" aria-hidden="true">?</p>
+    <div>
+      <h1>당연하게 해오던 방식에<br />한 번 더 물음표를 붙입니다</h1>
+      <p>퍼포먼스 마케터 박규진의 기록입니다. 검색광고를 운영하며 생긴 질문과, 그 질문을 데이터로 확인한 과정을 씁니다.</p>
+    </div>
+  </section>
+  <Cats />
+  <PostList posts={posts} />
+</Base>

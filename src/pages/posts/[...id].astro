@@ -1,0 +1,32 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib';
+import { slugOf } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const date = `${d.date.getFullYear()}년 ${d.date.getMonth() + 1}월 ${d.date.getDate()}일`;
+const parts = d.answer && d.number && d.answer.includes(d.number) ? d.answer.split(d.number) : null;
+---
+<Base title={d.title} description={d.answer} current="posts">
+  <article class="article">
+    <header>
+      <p class="meta">
+        <a href={`/category/${slugOf(d.category)}/`}>{d.category}</a> · <time datetime={d.date.toISOString()}>{date}</time>{d.draft && ' · 작성 중'}
+      </p>
+      <h1>{d.title}</h1>
+      {d.answer && (
+        <p class="lead">
+          {parts ? <>{parts[0]}<span class="num">{d.number}</span>{parts.slice(1).join(d.number)}</> : d.answer}
+        </p>
+      )}
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>

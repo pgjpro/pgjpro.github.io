@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import Cats from '../../components/Cats.astro';
+import { getPosts } from '../../lib';
+const posts = await getPosts();
+---
+<Base title="글" current="posts">
+  <Cats />
+  <PostList posts={posts} />
+</Base>
