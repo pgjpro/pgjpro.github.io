@@ -1,3 +1,9 @@
+# 네이버 검색로봇
+User-agent: Yeti
+Allow: /
+Disallow: /admin/
+
+# 그 밖의 모든 검색로봇 (구글, Bing, AI 검색 포함)
 User-agent: *
 Allow: /
 Disallow: /admin/
