@@ -12,6 +12,8 @@ export const SITE = {
   // 검색엔진 소유 확인 코드 (Search Console·서치어드바이저에서 받은 content 값만)
   verify: { google: '', naver: '' },
   url: 'https://marketerpark.co.kr',
+  // 하트(공감) 숫자를 저장하는 Cloudflare Worker 주소. 비워 두면 숫자 없이 하트만 동작합니다.
+  likesApi: 'https://marketerp-likes.judi8945.workers.dev',
 };
 
 // 콘텐츠 필라 = 카테고리

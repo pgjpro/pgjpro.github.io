@@ -1,0 +1,79 @@
+---
+import { SITE } from '../site';
+interface Props { slug: string; title: string; url: string }
+const { slug, title, url } = Astro.props;
+---
+<section class="react" data-slug={slug} data-title={title} data-url={url} data-api={SITE.likesApi}>
+  <p class="react-ask">하트는 마케터 P에게 큰 힘이 됩니다</p>
+  <button class="heart" type="button" aria-pressed="false" aria-label="이 글에 공감하기">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8.2 3.4 4.5 7 4.5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.5 3.7 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>
+    <span class="count" aria-live="polite"></span>
+  </button>
+  <div class="share">
+    <button class="chip" type="button" data-share="copy">링크 복사</button>
+    <button class="chip" type="button" data-share="kakao">카카오톡</button>
+  </div>
+  <p class="toast" role="status" aria-live="polite"></p>
+</section>
+
+<script>
+  declare const gtag: ((...a: unknown[]) => void) | undefined;
+  const box = document.querySelector<HTMLElement>('.react');
+  if (box) {
+    const { slug = '', title = '', url = location.href, api = '' } = box.dataset;
+    const btn = box.querySelector<HTMLButtonElement>('.heart')!;
+    const num = box.querySelector<HTMLElement>('.count')!;
+    const toastEl = box.querySelector<HTMLElement>('.toast')!;
+    const key = `liked:${slug}`;
+    const track = (name: string, extra = {}) => typeof gtag === 'function' && gtag('event', name, { post_slug: slug, ...extra });
+    let timer = 0;
+    const toast = (msg: string) => {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(timer);
+      timer = window.setTimeout(() => toastEl.classList.remove('show'), 1800);
+    };
+    const show = (n: number) => { num.textContent = n > 0 ? String(n) : ''; };
+    const liked = () => { try { return localStorage.getItem(key) === '1'; } catch { return false; } };
+    if (liked()) btn.setAttribute('aria-pressed', 'true');
+
+    if (api) {
+      fetch(`${api}/likes?slug=${slug}`).then((r) => r.json()).then((d) => show(d.count)).catch(() => {});
+    } else {
+      box.classList.add('no-api');
+    }
+
+    btn.addEventListener('click', async () => {
+      if (liked()) { toast('이미 공감해 주셨어요. 고마워요'); return; }
+      btn.setAttribute('aria-pressed', 'true');
+      btn.classList.add('pop');
+      setTimeout(() => btn.classList.remove('pop'), 260);
+      try { localStorage.setItem(key, '1'); } catch {}
+      toast('공감해 주셔서 고마워요');
+      track('like_click');
+      if (!api) return;
+      try {
+        const r = await fetch(`${api}/likes?slug=${slug}`, { method: 'POST' });
+        const d = await r.json();
+        if (typeof d.count === 'number') show(d.count);
+      } catch {}
+    });
+
+    const copy = async () => {
+      try { await navigator.clipboard.writeText(url); return true; } catch { return false; }
+    };
+    box.querySelectorAll<HTMLButtonElement>('[data-share]').forEach((b) => {
+      b.addEventListener('click', async () => {
+        const how = b.dataset.share;
+        track('share_click', { method: how });
+        if (how === 'kakao' && navigator.share && matchMedia('(pointer: coarse)').matches) {
+          try { await navigator.share({ title, url }); } catch {}
+          return;
+        }
+        const ok = await copy();
+        if (!ok) { toast('복사하지 못했어요. 주소창의 링크를 복사해 주세요'); return; }
+        toast(how === 'kakao' ? '링크를 복사했어요. 카카오톡 대화창에 붙여 넣어 주세요' : '링크를 복사했어요');
+      });
+    });
+  }
+</script>

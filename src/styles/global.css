@@ -286,3 +286,22 @@ img { max-width: 100%; height: auto; display: block; }
 
 @media (max-width: 40rem) { .topics { grid-template-columns: 1fr; } }
 .about dd a.mail { color: var(--blue); text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* 글 하단 반응 영역: 하트 + 공유 */
+.react { position: relative; max-width: var(--measure); margin: 3.5rem auto 0; text-align: center; }
+.react-ask { margin: 0 0 1rem; font-size: 1.05rem; font-weight: 700; }
+.react .heart { display: inline-flex; align-items: center; gap: 0.5rem; height: 3.25rem; min-width: 3.25rem; padding: 0 1.6rem; border-radius: 999px; border: 1px solid var(--gray); background: #fff; color: var(--charcoal); font: inherit; font-weight: 700; font-size: 1.05rem; cursor: pointer; }
+.react .heart:hover { border-color: #f5c2c4; }
+.react .heart svg { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 2; transition: transform 0.25s cubic-bezier(.3, 1.6, .5, 1); }
+.react .heart[aria-pressed="true"] { border-color: #f5c2c4; background: #fff5f5; color: #e5484d; }
+.react .heart[aria-pressed="true"] svg { fill: #e5484d; stroke: #e5484d; }
+.react .heart.pop svg { transform: scale(1.35); }
+.react .count { font-variant-numeric: tabular-nums; }
+.react .count:empty { display: none; }
+.react .share { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; }
+.react .chip { height: 2.5rem; padding: 0 1rem; border-radius: 999px; border: 1px solid var(--gray); background: #fff; color: var(--charcoal); font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
+.react .chip:hover { border-color: var(--lavender); }
+.react .heart:focus-visible, .react .chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.react .toast { position: fixed; left: 50%; bottom: 1.5rem; z-index: 10; margin: 0; transform: translate(-50%, 1rem); opacity: 0; background: var(--charcoal); color: #fff; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; transition: 0.2s; pointer-events: none; white-space: nowrap; }
+.react .toast.show { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { .react .heart svg, .react .toast { transition: none; } }

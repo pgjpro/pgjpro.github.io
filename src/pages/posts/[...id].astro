@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
+import Reactions from '../../components/Reactions.astro';
 import { getPosts } from '../../lib';
 import { SITE, slugOf, fmtDate, readMin, tagSlug } from '../../site';
 
@@ -45,6 +46,8 @@ const jsonLd = {
       <ul class="tag-cloud post-tags">{d.tags.map((t) => <li><a href={`/tags/${tagSlug(t)}/`}># {t}</a></li>)}</ul>
     )}
   </article>
+
+  <Reactions slug={post.id} title={d.title} url={url} />
 
   <aside class="author">
     <strong>{SITE.tagline}</strong>

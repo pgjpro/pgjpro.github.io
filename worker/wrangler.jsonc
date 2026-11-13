@@ -1,0 +1,13 @@
+{
+  "name": "marketerp-likes",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "marketerp-likes",
+      "database_id": "73cc508b-b4a8-42fc-ba04-f58623281361"
+    }
+  ]
+}
