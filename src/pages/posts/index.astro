@@ -7,7 +7,7 @@ const posts = await getPosts();
 // 연도별로 묶기 (최신 연도 먼저)
 const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))].sort((a, b) => b - a);
 ---
-<Base title="글" current="posts">
+<Base title="글" current="posts" noindex={posts.length === 0}>
   <header class="page-head">
     <h1>글</h1>
     <label class="search">

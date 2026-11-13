@@ -21,7 +21,7 @@ const jsonLd = {
   headline: d.title,
   description: d.answer ?? SITE.description,
   datePublished: d.date.toISOString(),
-  dateModified: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
   inLanguage: 'ko-KR',
   mainEntityOfPage: url,
   url,

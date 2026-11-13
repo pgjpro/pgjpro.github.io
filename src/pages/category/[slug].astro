@@ -11,7 +11,7 @@ export function getStaticPaths() {
 const { cat } = Astro.props;
 const posts = (await getPosts()).filter((p) => p.data.category === cat.name);
 ---
-<Base title={cat.name} current="category">
+<Base title={cat.name} current="category" noindex={posts.length === 0}>
   <header class="page-head">
     <h1>{cat.name}</h1>
     <p class="desc">{cat.desc}</p>

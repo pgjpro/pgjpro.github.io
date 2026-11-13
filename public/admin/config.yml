@@ -44,6 +44,7 @@ collections:
       - { name: number, label: 핵심 숫자, widget: string, required: false, hint: "대표 글 표지에 크게 보입니다 (예: 2.2배)" }
       - { name: cover, label: 표지 이미지, widget: image, required: false }
       - { name: date, label: 날짜, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false }
+      - { name: updated, label: 수정한 날짜, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false, required: false, hint: 발행 후 내용을 크게 고쳤을 때만 넣어 주세요. 검색엔진에 다시 읽어 가라고 알려 줍니다 }
       - name: category
         label: 카테고리
         widget: select

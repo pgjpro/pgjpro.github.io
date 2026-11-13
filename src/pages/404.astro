@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib';
+const latest = (await getPosts()).slice(0, 4);
+---
+<Base title="페이지를 찾을 수 없어요" noindex>
+  <header class="page-head">
+    <h1>페이지를 찾을 수 없어요</h1>
+    <p class="desc">주소가 바뀌었거나 지워진 글이에요. 홈이나 글 목록에서 찾아보세요.</p>
+    <p class="intro-links"><a href="/">홈으로</a> <a href="/posts/">글 목록 보기</a></p>
+  </header>
+  {latest.length > 0 && (
+    <section class="latest">
+      <div class="sec-head"><h2>최근 글</h2></div>
+      <PostList posts={latest} />
+    </section>
+  )}
+</Base>

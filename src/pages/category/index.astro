@@ -5,7 +5,7 @@ import { CATEGORIES } from '../../site';
 const all = await getPosts();
 const count = (c: string) => all.filter((p) => p.data.category === c).length;
 ---
-<Base title="카테고리" current="category">
+<Base title="카테고리" current="category" noindex={all.length === 0}>
   <header class="page-head"><h1>카테고리</h1></header>
   <ul class="pillars">
     {CATEGORIES.map((c) => (
