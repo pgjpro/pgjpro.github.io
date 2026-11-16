@@ -17,7 +17,8 @@ const nav = [
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    {SITE.ga4 && (
+    {/* GA4: 배포된 사이트에서만 (개발 서버 localhost 방문은 집계하지 않음) */}
+    {SITE.ga4 && import.meta.env.PROD && (
       <>
         <!-- Google tag (gtag.js) -->
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}`}></script>
