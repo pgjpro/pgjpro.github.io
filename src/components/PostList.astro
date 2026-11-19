@@ -11,12 +11,10 @@ const { posts, withSum = false } = Astro.props;
     {posts.map((p) => (
       <li data-search={`${p.data.title} ${p.data.answer ?? ''} ${p.data.category}`.toLowerCase()}>
         <a href={`/posts/${p.id}/`}>
+          {p.data.cover ? <img class="thumb" src={p.data.cover} alt="" loading="lazy" width="1600" height="1000" /> : <span class="thumb" aria-hidden="true"></span>}
           <span class="cat">{p.data.category}</span>
-          {p.data.cover ? <img class="thumb" src={p.data.cover} alt="" loading="lazy" width="160" height="100" /> : <span class="thumb soft" aria-hidden="true"></span>}
-          <span class="t">
-            <span class="title">{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</span>
-            {withSum && p.data.answer && <span class="sum">{p.data.answer}</span>}
-          </span>
+          <span class="title">{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</span>
+          {withSum && p.data.answer && <span class="sum"><b>한 줄 답</b><span>{p.data.answer}</span></span>}
           <time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date)}</time>
         </a>
       </li>
