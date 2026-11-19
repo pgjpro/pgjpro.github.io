@@ -42,6 +42,8 @@ function isEmptyPage(url) {
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
+  // CSS를 HTML 안에 넣어, 배포 직후 예전 HTML이 사라진 CSS 파일을 찾다 디자인이 깨지는 일을 막습니다.
+  build: { inlineStylesheets: 'always' },
   integrations: [
     sitemap({
       filter: (page) => !isEmptyPage(page),
