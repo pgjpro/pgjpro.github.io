@@ -33,7 +33,7 @@ draft: false
 - 한 사람이 감당할 수 있는 계정 수에는 한계가 있습니다.
 - 그래서 계정이 늘면 운영 인력도 같이 늘려야 합니다.
 
-자동화가 늘면서 한 사람이 맡을 수 있는 범위는 넓어지고 있지만, 계정마다 광고주와 소통하고 결과를 설명하는 일은 여전히 사람이 합니다. ([EP.04](/posts/will-ai-replace-performance-marketer) 참고)
+자동화가 늘면서 한 사람이 맡을 수 있는 범위는 넓어지고 있지만, 계정마다 광고주와 소통하고 결과를 설명하는 일은 여전히 사람이 합니다. ([AI 시대의 퍼포먼스 마케터](/posts/will-ai-replace-performance-marketer) 참고)
 
 ## 연차별로 무슨 일을 할까?
 
@@ -73,4 +73,4 @@ draft: false
 
 다음 분해에서는 시간을 거슬러 올라가, 퍼포먼스 마케팅이 **어떻게 지금의 모습이 됐는지** 봅니다.
 
-→ [S2-3 퍼포먼스 마케팅은 어떻게 발전해 왔을까?](/posts/performance-marketing-history)
+→ [퍼포먼스 마케팅은 어떻게 발전해 왔을까?](/posts/performance-marketing-history)
