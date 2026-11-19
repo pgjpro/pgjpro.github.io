@@ -5,6 +5,8 @@ cover: "/covers/ad-agency-market-structure.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "광고대행사", "미디어렙"]
+series: s2
+part: 1
 draft: false
 ---
 

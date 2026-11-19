@@ -5,6 +5,8 @@ cover: "/covers/why-ad-agencies-hire-juniors.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "광고대행사", "취업 준비"]
+series: s2
+part: 2
 draft: false
 ---
 

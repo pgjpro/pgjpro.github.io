@@ -285,9 +285,12 @@ img { max-width: 100%; height: auto; display: block; }
 .topics .count { color: var(--faint); font-size: 0.8rem; margin-top: 0.25rem; }
 
 /* 글 목록 연도 구분 */
-.year { padding-top: 1.75rem; }
-.year-h { margin: 0 0 0.25rem; font-size: 1.05rem; letter-spacing: -0.02em; }
-.year-h small { color: var(--faint); font-weight: 500; margin-left: 0.25rem; }
+.group { padding-top: 3rem; }
+.group + .group { margin-top: 1rem; border-top: 1px solid var(--gray); }
+.group-h { margin: 0; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; }
+.group-h small { color: var(--faint); font-size: 0.9rem; font-weight: 500; margin-left: 0.4rem; }
+.group-desc { margin: 0.4rem 0 1.75rem; color: var(--sub); font-size: 0.95rem; }
+.group-h + .rows { margin-top: 1.75rem; }
 
 @media (max-width: 40rem) { .topics { grid-template-columns: 1fr; } }
 .about dd a.mail { color: var(--blue); text-decoration: underline; text-underline-offset: 0.2em; }

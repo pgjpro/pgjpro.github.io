@@ -7,6 +7,8 @@ category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케팅", "광고 지표"]
 featured: true
 order: 1
+series: s1
+part: 1
 draft: false
 ---
 

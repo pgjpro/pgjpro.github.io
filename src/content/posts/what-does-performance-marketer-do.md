@@ -7,6 +7,8 @@ category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고 지표", "전환 측정"]
 featured: true
 order: 2
+series: s1
+part: 2
 draft: false
 ---
 

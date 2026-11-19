@@ -5,6 +5,8 @@ cover: "/covers/performance-marketer-resources.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "광고 지표", "GA4"]
+series: s2
+part: 5
 draft: false
 ---
 

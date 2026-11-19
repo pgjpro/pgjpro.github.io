@@ -5,6 +5,8 @@ cover: "/covers/will-ai-replace-performance-marketer.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "마케팅 자동화", "전환 측정"]
+series: s1
+part: 4
 draft: false
 ---
 

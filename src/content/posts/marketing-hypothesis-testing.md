@@ -5,6 +5,8 @@ cover: "/covers/marketing-hypothesis-testing.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "가설", "AB 테스트", "성과 측정"]
+series: s3
+part: 3
 draft: false
 ---
 

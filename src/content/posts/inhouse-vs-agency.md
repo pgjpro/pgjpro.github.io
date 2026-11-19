@@ -7,6 +7,8 @@ category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고대행사"]
 featured: true
 order: 3
+series: s1
+part: 3
 draft: false
 ---
 

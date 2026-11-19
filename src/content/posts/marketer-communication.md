@@ -5,6 +5,8 @@ cover: "/covers/marketer-communication.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "커뮤니케이션", "리포트"]
+series: s3
+part: 4
 draft: false
 ---
 

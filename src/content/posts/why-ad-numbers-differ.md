@@ -5,6 +5,8 @@ cover: "/covers/why-ad-numbers-differ.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "전환 측정", "GA4"]
+series: s2
+part: 4
 draft: false
 ---
 

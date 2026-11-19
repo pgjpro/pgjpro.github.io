@@ -25,6 +25,13 @@ export const CATEGORIES = [
 ] as const;
 export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name) as unknown as readonly [string, ...string[]];
 
+// 시리즈 (글 목록에서 이 순서대로 묶어 보여 줍니다)
+export const SERIES = [
+  { key: 's1', name: '시즌 1. 퍼포먼스 마케팅 쪼개 보기', desc: '퍼포먼스 마케팅이 무엇이고, 누가 어디서 어떻게 일하는지' },
+  { key: 's2', name: '시즌 2. 광고 업계와 측정 쪼개 보기', desc: '광고가 거래되는 구조, 업계의 역사, 숫자가 어긋나는 이유, 참고 자료' },
+  { key: 's3', name: '시즌 3. 역량 쪼개 보기', desc: '데이터 분석부터 사업 이해까지, 다섯 역량을 기본부터 심화까지' },
+] as const;
+
 export const tagSlug = (t: string) => encodeURIComponent(t.replace(/\s+/g, '-'));
 
 export const slugOf =(cat: string) => CATEGORIES.find((c) => c.name === cat)?.slug ?? 'marketing';
