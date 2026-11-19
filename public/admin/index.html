@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>글쓰기 | 마케터 P</title>
+    <style>
+      /* 글 작성 화면: 작성란을 넓게·가운데로, 미리 보기는 오른쪽에 좁게 */
+      .content-editor .resizable-pane-group:has([data-mode="preview"]) > .resizable-pane:first-child {
+        flex: 1 1 auto !important;
+      }
+      .content-editor .resizable-pane-group:has([data-mode="preview"]) > .resizable-pane:last-child {
+        flex: 0 0 clamp(300px, 30%, 520px) !important;
+      }
+      .content-editor .pane[data-mode="edit"] .content > section.field {
+        max-width: 48rem;
+        margin-inline: auto;
+      }
+    </style>
   </head>
   <body>
     <!-- 블로그 글쓰기 화면 (Sveltia CMS). 저장하면 GitHub 에 올라가고 약 1분 뒤 사이트에 반영됩니다. -->
