@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PostList from '../../components/PostList.astro';
+import SeriesGroups from '../../components/SeriesGroups.astro';
 import Cats from '../../components/Cats.astro';
 import { getPosts } from '../../lib';
 import { CATEGORIES } from '../../site';
@@ -17,5 +17,5 @@ const posts = (await getPosts()).filter((p) => p.data.category === cat.name);
     <p class="desc">{cat.desc}</p>
     <Cats current={cat.name} />
   </header>
-  <PostList posts={posts} withSum />
+  {posts.length === 0 ? <p class="empty">아직 올라온 글이 없습니다.</p> : <SeriesGroups posts={posts} />}
 </Base>

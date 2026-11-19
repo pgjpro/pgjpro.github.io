@@ -1,0 +1,32 @@
+---
+// 글을 시리즈(길라잡이)별로 묶어 보여 줍니다. 시리즈가 없는 글은 '그 밖의 글'로 모읍니다.
+import type { CollectionEntry } from 'astro:content';
+import PostList from './PostList.astro';
+import { SERIES, SERIES_TITLE } from '../site';
+interface Props { posts: CollectionEntry<'posts'>[] }
+const { posts } = Astro.props;
+const seriesGroups = SERIES.map((s) => ({
+  name: s.name,
+  desc: s.desc,
+  list: posts.filter((p) => p.data.series === s.key).sort((a, b) => (a.data.part ?? 99) - (b.data.part ?? 99)),
+})).filter((g) => g.list.length > 0);
+const others = posts.filter((p) => !SERIES.some((s) => s.key === p.data.series));
+---
+{seriesGroups.length > 0 && (
+  <div class="series">
+    <h2 class="series-h">{SERIES_TITLE}</h2>
+    {seriesGroups.map((g) => (
+      <section class="group">
+        <h3 class="group-h">{g.name} <small>{g.list.length}편</small></h3>
+        <p class="group-desc">{g.desc}</p>
+        <PostList posts={g.list} withSum />
+      </section>
+    ))}
+  </div>
+)}
+{others.length > 0 && (
+  <section class="group">
+    {seriesGroups.length > 0 && <h2 class="series-h">그 밖의 글</h2>}
+    <PostList posts={others} withSum />
+  </section>
+)}

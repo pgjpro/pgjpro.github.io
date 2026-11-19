@@ -1,17 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PostList from '../../components/PostList.astro';
+import SeriesGroups from '../../components/SeriesGroups.astro';
 import Cats from '../../components/Cats.astro';
 import { getPosts } from '../../lib';
-import { SERIES, SERIES_TITLE } from '../../site';
 const posts = await getPosts();
-// 시리즈별로 묶고(시리즈 안에서는 순서대로), 시리즈가 없는 글은 '그 밖의 글'로 모읍니다.
-const seriesGroups = SERIES.map((s) => ({
-    name: s.name,
-    desc: s.desc,
-    list: posts.filter((p) => p.data.series === s.key).sort((a, b) => (a.data.part ?? 99) - (b.data.part ?? 99)),
-})).filter((g) => g.list.length > 0);
-const others = posts.filter((p) => !SERIES.some((s) => s.key === p.data.series));
 ---
 <Base title="글" current="posts" noindex={posts.length === 0}>
   <header class="page-head">
@@ -23,24 +15,7 @@ const others = posts.filter((p) => !SERIES.some((s) => s.key === p.data.series))
     <Cats />
   </header>
   {posts.length === 0 && <p class="empty">아직 올라온 글이 없습니다.</p>}
-  {seriesGroups.length > 0 && (
-    <div class="series">
-      <h2 class="series-h">{SERIES_TITLE}</h2>
-      {seriesGroups.map((g) => (
-        <section class="group">
-          <h3 class="group-h">{g.name} <small>{g.list.length}편</small></h3>
-          <p class="group-desc">{g.desc}</p>
-          <PostList posts={g.list} withSum />
-        </section>
-      ))}
-    </div>
-  )}
-  {others.length > 0 && (
-    <section class="group">
-      <h2 class="series-h">그 밖의 글</h2>
-      <PostList posts={others} withSum />
-    </section>
-  )}
+  <SeriesGroups posts={posts} />
   <p class="empty" id="no-hit" hidden>찾는 글이 없습니다. 다른 단어로 찾아 보세요.</p>
   <script>
     const q = document.getElementById('q') as HTMLInputElement;

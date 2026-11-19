@@ -60,6 +60,7 @@ collections:
           - { label: "퍼포먼스 마케팅 길라잡이", value: s1 }
           - { label: "광고 시장과 성과 측정 길라잡이", value: s2 }
           - { label: "퍼포먼스 마케터의 역량 길라잡이", value: s3 }
+          - { label: "데이터 분석 길라잡이", value: s4 }
         hint: 글 목록에서 시리즈별로 묶여 보입니다. 시리즈가 아니면 비워 두세요
       - { name: part, label: 시리즈 안 순서, widget: number, value_type: int, required: false, hint: "1, 2, 3… 작은 숫자가 먼저 보입니다" }
       - { name: draft, label: 작성 중 (사이트에 숨김), widget: boolean, default: true }
