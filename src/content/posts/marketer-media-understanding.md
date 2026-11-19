@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케터의 매체 이해, 광고 경매부터 예산 배분까지"
 answer: "매체 이해는 매체마다 누구를 언제 만나는지, 광고가 어떤 경매와 과금 방식으로 팔리는지, 자동화가 무엇을 보고 배우는지 알고, 그 위에서 예산을 나누고 다시 옮기는 힘이다."
+cover: "/covers/marketer-media-understanding.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고 매체"]

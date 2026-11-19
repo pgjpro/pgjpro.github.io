@@ -1,6 +1,7 @@
 ---
 title: "AI 시대에도 퍼포먼스 마케터가 필요할까? 자동화 이후 남는 일"
 answer: "입찰·타깃팅·소재 조합처럼 반복되는 최적화는 AI가 맡고 있지만, 무엇을 목표로 할지, 어떤 데이터를 믿을지, 결과를 어떻게 설명할지는 여전히 사람이 판단한다."
+cover: "/covers/will-ai-replace-performance-marketer.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "마케팅 자동화", "전환 측정"]

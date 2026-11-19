@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케터가 참고하는 자료 총정리: 통계, 리포트, 매체 도움말, 도구"
 answer: "광고 시장 통계는 제일기획 총 광고비 결산과 방송통신광고비 조사, 업계 흐름은 미디어렙 리포트, 실무 기준은 각 매체 공식 도움말, 검색어와 트렌드는 네이버 데이터랩과 구글 트렌드에서 확인한다."
+cover: "/covers/performance-marketer-resources.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "광고 지표", "GA4"]

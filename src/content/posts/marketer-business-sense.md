@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케터의 사업 이해, 마진에서 목표 CPA와 예산까지"
 answer: "퍼포먼스 마케터의 사업 이해는 상품 한 건에 얼마가 남는지(공헌이익)에서 손익분기 ROAS·CPA를 계산하고, 재구매·재고·반품 같은 광고 밖 숫자를 더해 목표와 예산 규모를 정하는 힘이다."
+cover: "/covers/marketer-business-sense.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고 지표", "ROAS"]

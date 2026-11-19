@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케터는 무슨 일을 할까? 실제 역할과 필요한 역량"
 answer: "퍼포먼스 마케터는 목표 숫자를 정하고, 광고를 세팅·운영하고, 결과를 해석해 다음 결정을 설명하는 사람이다."
+cover: "/covers/what-does-performance-marketer-do.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고 지표", "전환 측정"]

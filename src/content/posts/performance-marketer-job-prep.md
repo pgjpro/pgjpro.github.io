@@ -1,6 +1,7 @@
 ---
 title: "신입 퍼포먼스 마케터, 취업 준비는 어디서 시작할까"
 answer: "신입 퍼포먼스 마케터에게는 툴 자격증보다 숫자로 문제를 쪼개고 그 과정을 설명해 본 경험이 중요하고, 준비는 작은 광고를 직접 집행해 보는 데서 시작하면 된다."
+cover: "/covers/performance-marketer-job-prep.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "취업 준비"]

@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케팅 기획, 가설 세우기부터 테스트와 성과 측정까지"
 answer: "퍼포먼스 마케팅 기획은 목표를 숫자로 합의하고, 무엇을 바꾸면 어떤 숫자가 왜 움직일지 가설로 적고, 한 번에 하나만 바꿔 테스트한 뒤, 미리 정한 기준으로 성과를 판정하고 기록하는 과정이다."
+cover: "/covers/marketing-hypothesis-testing.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "가설", "AB 테스트", "성과 측정"]

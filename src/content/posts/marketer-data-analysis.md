@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케터의 데이터 분석, 지표 쪼개기부터 원인 확인까지"
 answer: "퍼포먼스 마케터의 데이터 분석은 지표를 식으로 쪼개고, 기준별로 나눠 보고, 알맞은 기준과 비교해 원인 후보를 좁힌 뒤, 그 원인이 맞는지 확인하는 과정이다."
+cover: "/covers/marketer-data-analysis.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "데이터 분석"]

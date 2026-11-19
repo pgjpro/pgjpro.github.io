@@ -1,6 +1,7 @@
 ---
 title: "퍼포먼스 마케팅이란? 단어를 쪼개 보면 보이는 정의"
 answer: "퍼포먼스 마케팅은 광고가 만든 행동(클릭·가입·구매)을 세고, 그 숫자를 보며 돈을 다시 배분하는 마케팅이다."
+cover: "/covers/performance-marketing-why.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케팅", "광고 지표"]

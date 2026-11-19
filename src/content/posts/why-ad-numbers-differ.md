@@ -1,6 +1,7 @@
 ---
 title: "GA4와 광고 매체 전환 수는 왜 다를까? 원인과 확인 순서"
 answer: "GA4와 광고 매체는 전환을 누구 몫으로 셀지(기여 방식), 언제까지 셀지(기간), 무엇을 셀지(클릭·조회)가 달라서 숫자가 다르고, 개인정보 보호 강화로 추적 자체가 어려워지면서 그 차이가 더 커졌다."
+cover: "/covers/why-ad-numbers-differ.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "전환 측정", "GA4"]
