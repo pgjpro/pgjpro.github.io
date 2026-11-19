@@ -25,11 +25,12 @@ export const CATEGORIES = [
 ] as const;
 export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name) as unknown as readonly [string, ...string[]];
 
-// 시리즈 (글 목록에서 이 순서대로 묶어 보여 줍니다)
+// 시리즈 (글 목록에서 전체 제목 아래 이 순서대로 묶어 보여 줍니다)
+export const SERIES_TITLE = '퍼포먼스 마케팅 쪼개 보기';
 export const SERIES = [
-  { key: 's1', name: '시즌 1. 퍼포먼스 마케팅 쪼개 보기', desc: '퍼포먼스 마케팅이 무엇이고, 누가 어디서 어떻게 일하는지' },
-  { key: 's2', name: '시즌 2. 광고 업계와 측정 쪼개 보기', desc: '광고가 거래되는 구조, 업계의 역사, 숫자가 어긋나는 이유, 참고 자료' },
-  { key: 's3', name: '시즌 3. 역량 쪼개 보기', desc: '데이터 분석부터 사업 이해까지, 다섯 역량을 기본부터 심화까지' },
+  { key: 's1', name: '퍼포먼스 마케팅 길라잡이', desc: '퍼포먼스 마케팅의 정의부터 인하우스와 대행사의 역할, AI 이후의 업무, 첫 실습까지 살펴봅니다.' },
+  { key: 's2', name: '광고 시장과 성과 측정 길라잡이', desc: '광고 한 건이 어떻게 거래되는지, 광고와 측정 기술이 어떻게 바뀌었는지, GA4와 광고 매체의 전환 수가 왜 다른지 살펴봅니다.' },
+  { key: 's3', name: '퍼포먼스 마케터의 역량 길라잡이', desc: '데이터 분석, 매체 이해, 기획과 검증, 커뮤니케이션, 사업 이해를 기본 개념부터 실무 판단까지 쪼개 봅니다.' },
 ] as const;
 
 export const tagSlug = (t: string) => encodeURIComponent(t.replace(/\s+/g, '-'));

@@ -285,9 +285,10 @@ img { max-width: 100%; height: auto; display: block; }
 .topics .count { color: var(--faint); font-size: 0.8rem; margin-top: 0.25rem; }
 
 /* 글 목록 연도 구분 */
-.group { padding-top: 3rem; }
+.series-h { margin: 3rem 0 0; padding-bottom: 0.9rem; border-bottom: 2px solid var(--charcoal); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.035em; }
+.group { padding-top: 2.5rem; }
 .group + .group { margin-top: 1rem; border-top: 1px solid var(--gray); }
-.group-h { margin: 0; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; }
+.group-h { margin: 0; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.03em; }
 .group-h small { color: var(--faint); font-size: 0.9rem; font-weight: 500; margin-left: 0.4rem; }
 .group-desc { margin: 0.4rem 0 1.75rem; color: var(--sub); font-size: 0.95rem; }
 .group-h + .rows { margin-top: 1.75rem; }
