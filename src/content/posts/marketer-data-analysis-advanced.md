@@ -7,7 +7,7 @@ category: Marketing
 tags: ["P의 분해노트", "데이터 분석", "증분 측정", "MMM"]
 series: s4
 part: 3
-draft: true
+draft: false
 ---
 
 <!--
