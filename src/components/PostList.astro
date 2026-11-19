@@ -12,6 +12,7 @@ const { posts, withSum = false } = Astro.props;
       <li data-search={`${p.data.title} ${p.data.answer ?? ''} ${p.data.category}`.toLowerCase()}>
         <a href={`/posts/${p.id}/`}>
           <span class="cat">{p.data.category}</span>
+          {p.data.cover ? <img class="thumb" src={p.data.cover} alt="" loading="lazy" width="160" height="100" /> : <span class="thumb soft" aria-hidden="true"></span>}
           <span class="t">
             <span class="title">{p.data.title}{p.data.draft && <em class="draft">작성 중</em>}</span>
             {withSum && p.data.answer && <span class="sum">{p.data.answer}</span>}

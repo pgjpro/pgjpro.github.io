@@ -5,6 +5,8 @@ cover: "/covers/inhouse-vs-agency.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고대행사"]
+featured: true
+order: 3
 draft: false
 ---
 

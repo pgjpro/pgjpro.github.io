@@ -7,7 +7,10 @@ import { getPosts } from '../lib';
 import { SITE, CATEGORIES, fmtDate } from '../site';
 const all = await getPosts();
 // 대표 글: featured 로 고른 글 최대 3개 (없으면 최신 글 1개)
-const picked = all.filter((p) => p.data.featured).slice(0, 3);
+const picked = all
+  .filter((p) => p.data.featured)
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .slice(0, 3);
 const featured = picked.length ? picked : all.slice(0, 1);
 const recent = all.filter((p) => !featured.includes(p)).slice(0, 6);
 const count = (c: string) => all.filter((p) => p.data.category === c).length;

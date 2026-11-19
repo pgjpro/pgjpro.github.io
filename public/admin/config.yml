@@ -51,6 +51,7 @@ collections:
         options: [Marketing, AI & Automation, Projects, Journal]
       - { name: tags, label: 태그, widget: list, required: false, hint: "검색어가 될 만한 단어 2~4개 (쉼표로 구분)" }
       - { name: featured, label: 홈 대표 글, widget: boolean, default: false, hint: 홈에 최대 3개까지 보입니다 }
+      - { name: order, label: 대표 글 순서, widget: number, value_type: int, required: false, hint: 숫자가 작을수록 앞에 보입니다 }
       - { name: draft, label: 작성 중 (사이트에 숨김), widget: boolean, default: true }
       - { name: body, label: 본문, widget: markdown }
 

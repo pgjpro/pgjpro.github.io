@@ -15,6 +15,7 @@ const posts = defineCollection({
     category: z.enum(CATEGORY_NAMES as [string, ...string[]]), // Marketing | AI & Automation | Projects | Journal
     tags: z.array(z.string()).default([]),   // 검색어가 될 만한 단어
     featured: z.boolean().default(false),    // 홈 대표 글
+    order: z.number().optional(),           // 대표 글 순서 (작을수록 앞)
     draft: z.boolean().default(false),
   }),
 });

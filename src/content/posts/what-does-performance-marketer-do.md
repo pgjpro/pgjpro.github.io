@@ -5,6 +5,8 @@ cover: "/covers/what-does-performance-marketer-do.png"
 date: 2026-11-19
 category: Marketing
 tags: ["P의 분해노트", "퍼포먼스 마케터", "광고 지표", "전환 측정"]
+featured: true
+order: 2
 draft: false
 ---
 
