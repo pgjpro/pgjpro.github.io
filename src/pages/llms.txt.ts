@@ -11,7 +11,7 @@ export const GET: APIRoute = async () => {
     '',
     `> ${SITE.description}`,
     '',
-    `작성자: ${SITE.name} (${SITE.role}). 블로그 이름은 "${SITE.title}"입니다.`,
+    `작성자: ${SITE.name} (${SITE.role}).`,
     '광고주 이름은 가명으로, 광고비는 비율(%)로 표기합니다.',
     '',
     '## 소개',
